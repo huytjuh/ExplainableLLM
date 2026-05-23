@@ -14,7 +14,7 @@ class JudgeResult:
     rationale: str
 
 
-def build_judge_prompt(question: str, answer: str, reference: str, context: str = "") -> str:
+def build_judge_prompt(question: str, answer: str, reference: str, context: str | None=None) -> str:
     return f"""You are evaluating an LLM answer.
 
 Score from 1 to 5 using this rubric:
@@ -32,7 +32,7 @@ Candidate answer:
 {answer}
 
 Retrieved context:
-{context}
+{context or ""}
 
 Return JSON with score, label, and rationale."""
 
@@ -40,7 +40,7 @@ Return JSON with score, label, and rationale."""
 class HeuristicJudge:
     """A deterministic stand-in for an API-backed LLM judge."""
 
-    def score(self, question: str, answer: str, reference: str, context: str = "") -> JudgeResult:
+    def score(self, question: str, answer: str, reference: str, context: str | None=None) -> JudgeResult:
         del question
         f1 = token_f1(answer, reference)
         grounded_bonus = 0.1 if context and any(token in context.lower() for token in answer.lower().split()) else 0.0

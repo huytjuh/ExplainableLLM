@@ -19,7 +19,7 @@ class TraceRecorder:
         self.run.events.append(event)
         return event
 
-    def write(self, directory: str | Path = "artifacts/traces") -> Path:
+    def write(self, directory: str | Path="artifacts/traces") -> Path:
         output_dir = Path(directory)
         output_dir.mkdir(parents=True, exist_ok=True)
         path = output_dir / f"{self.run.name}-{self.run.run_id}.json"

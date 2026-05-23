@@ -1,5 +1,49 @@
 """LLM API wrappers aligned to roadmap item 3."""
 
-from gemini_flash_lite import GeminiFlashLiteClient, GeminiResponse
+from S01_client import (
+    BaseLLMClient,
+    ClaudeClient,
+    DEFAULT_MODELS,
+    GeminiClient,
+    GeminiFlashLiteClient,
+    LLMClient,
+    LLMClientError,
+    LLMResponse,
+    LLMSettings,
+    MissingAPIKeyError,
+    MissingSDKError,
+    OllamaClient,
+    OpenAIClient,
+    StreamChunk,
+    UnknownProviderError,
+    claude_kwargs,
+    gemini_kwargs,
+    make_provider_client,
+    merge_generation,
+    ollama_options,
+    openai_kwargs,
+)
 
-__all__ = ["GeminiFlashLiteClient", "GeminiResponse"]
+__all__ = [
+    "BaseLLMClient",
+    "ClaudeClient",
+    "DEFAULT_MODELS",
+    "GeminiClient",
+    "GeminiFlashLiteClient",
+    "LLMClient",
+    "LLMClientError",
+    "LLMResponse",
+    "LLMSettings",
+    "MissingAPIKeyError",
+    "MissingSDKError",
+    "OllamaClient",
+    "OpenAIClient",
+    "StreamChunk",
+    "UnknownProviderError",
+    "claude_kwargs",
+    "gemini_kwargs",
+    "make_provider_client",
+    "merge_generation",
+    "ollama_options",
+    "openai_kwargs",
+]

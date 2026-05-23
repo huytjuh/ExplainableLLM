@@ -24,9 +24,9 @@ def greedy_decode(logits: list[float]) -> int:
 def sample_next_token(
     logits: list[float],
     *,
-    temperature: float = 1.0,
-    top_k: int | None = None,
-    rng: random.Random | None = None,
+    temperature: float=1.0,
+    top_k: int | None=None,
+    rng: random.Random | None=None,
 ) -> tuple[int, list[float]]:
     """Sample a token id and return the full probability vector used."""
 
@@ -56,16 +56,16 @@ def generate_tokens(
     next_logits,
     id_to_token: dict[int, str],
     *,
-    max_tokens: int = 16,
-    temperature: float = 0.0,
-    top_k: int | None = None,
-    seed: int = 7,
+    max_tokens: int=16,
+    temperature: float=0.0,
+    top_k: int | None=None,
+    seed: int=7,
 ) -> list[GenerationStep]:
     """Generate tokens from a callback that returns logits for each step."""
 
     rng = random.Random(seed)
-    steps: list[GenerationStep] = []
-    generated_ids: list[int] = []
+    steps: list[GenerationStep]=[]
+    generated_ids: list[int]=[]
 
     for step in range(max_tokens):
         logits = next_logits(generated_ids)

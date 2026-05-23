@@ -33,7 +33,7 @@ def scaled_dot_product_attention(
     keys: Matrix,
     values: Matrix,
     *,
-    causal: bool = True,
+    causal: bool=True,
 ) -> tuple[Matrix, Matrix]:
     """Return attention outputs and the attention weight matrix."""
 
@@ -41,8 +41,8 @@ def scaled_dot_product_attention(
         return [], []
 
     scale = math.sqrt(len(keys[0]))
-    outputs: Matrix = []
-    all_weights: Matrix = []
+    outputs: Matrix=[]
+    all_weights: Matrix=[]
 
     for query_index, query in enumerate(queries):
         scores = []

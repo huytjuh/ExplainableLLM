@@ -10,7 +10,7 @@ class VectorRecord:
     id: str
     text: str
     vector: list[float]
-    metadata: dict[str, str] = field(default_factory=dict)
+    metadata: dict[str, str]=field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -21,19 +21,19 @@ class SearchResult:
 
 class InMemoryVectorStore:
     def __init__(self) -> None:
-        self._records: list[VectorRecord] = []
+        self._records: list[VectorRecord]=[]
 
-    def add(self, record_id: str, text: str, vector: list[float], metadata: dict[str, str] | None = None) -> None:
+    def add(self, record_id: str, text: str, vector: list[float], metadata: dict[str, str] | None=None) -> None:
         self._records.append(VectorRecord(record_id, text, vector, metadata or {}))
 
     def search(
         self,
         query_vector: list[float],
         *,
-        top_k: int = 3,
-        metadata_filter: dict[str, str] | None = None,
+        top_k: int=3,
+        metadata_filter: dict[str, str] | None=None,
     ) -> list[SearchResult]:
-        results: list[SearchResult] = []
+        results: list[SearchResult]=[]
         for record in self._records:
             if metadata_filter and any(record.metadata.get(key) != value for key, value in metadata_filter.items()):
                 continue

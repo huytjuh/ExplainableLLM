@@ -22,7 +22,7 @@ class AzurePipelineArtifact:
         )
 
 
-def discover_artifacts(root: str | Path = "artifacts") -> list[AzurePipelineArtifact]:
+def discover_artifacts(root: str | Path="artifacts") -> list[AzurePipelineArtifact]:
     base = Path(root)
     return [
         AzurePipelineArtifact(name=child.name, path=str(child))

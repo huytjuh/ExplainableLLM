@@ -16,13 +16,13 @@ def utc_now() -> str:
 class TraceEvent:
     name: str
     payload: dict[str, Any]
-    timestamp: str = field(default_factory=utc_now)
+    timestamp: str=field(default_factory=utc_now)
 
 
 @dataclass
 class TraceRun:
     name: str
-    run_id: str = field(default_factory=lambda: str(uuid4()))
-    started_at: str = field(default_factory=utc_now)
-    events: list[TraceEvent] = field(default_factory=list)
+    run_id: str=field(default_factory=lambda: str(uuid4()))
+    started_at: str=field(default_factory=utc_now)
+    events: list[TraceEvent]=field(default_factory=list)
 

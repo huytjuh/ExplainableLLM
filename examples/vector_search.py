@@ -1,7 +1,7 @@
 import _path_setup  # noqa: F401
 
-from embeddings import HashingEmbeddingModel
-from vector_store import InMemoryVectorStore
+from S03_embeddings import HashingEmbeddingModel
+from S04_indexing import InMemoryVectorStore
 
 
 if __name__ == "__main__":

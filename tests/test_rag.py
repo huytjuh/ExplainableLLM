@@ -1,7 +1,8 @@
-from chunking import chunk_text
-from embeddings import HashingEmbeddingModel
-from retrieve import build_context, retrieve
-from vector_store import InMemoryVectorStore
+from S02_chunking import chunk_text
+from S03_embeddings import HashingEmbeddingModel
+from S04_indexing import InMemoryVectorStore
+from S05_retrieval import retrieve
+from S07_context import build_context
 
 
 def test_chunk_text_with_overlap():

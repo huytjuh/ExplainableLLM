@@ -1,10 +1,11 @@
 import _path_setup  # noqa: F401
 
-from chunking import chunk_text
-from embeddings import HashingEmbeddingModel
+from S02_chunking import chunk_text
+from S03_embeddings import HashingEmbeddingModel
+from S04_indexing import InMemoryVectorStore
+from S05_retrieval import retrieve
+from S07_context import build_context
 from recorder import TraceRecorder
-from retrieve import build_context, retrieve
-from vector_store import InMemoryVectorStore
 
 
 if __name__ == "__main__":

@@ -7,6 +7,8 @@ build/
 dist/
 *.egg-info/
 .env
+config/*.local.json
+config/*.local.yaml
+config/*.local.yml
 artifacts/**/*.json
 !artifacts/**/.gitkeep
-

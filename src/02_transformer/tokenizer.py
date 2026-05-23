@@ -19,10 +19,10 @@ TOKEN_PATTERN = re.compile(r"\w+|[^\w\s]", re.UNICODE)
 class SimpleTokenizer:
     """A tiny word-and-punctuation tokenizer with explicit special tokens."""
 
-    lowercase: bool = True
-    special_tokens: tuple[str, ...] = ("<pad>", "<unk>", "<bos>", "<eos>")
-    token_to_id: dict[str, int] = field(default_factory=dict)
-    id_to_token: dict[int, str] = field(default_factory=dict)
+    lowercase: bool=True
+    special_tokens: tuple[str, ...]=("<pad>", "<unk>", "<bos>", "<eos>")
+    token_to_id: dict[str, int]=field(default_factory=dict)
+    id_to_token: dict[int, str]=field(default_factory=dict)
 
     def __post_init__(self) -> None:
         if not self.token_to_id:
@@ -35,8 +35,8 @@ class SimpleTokenizer:
     def tokenize(self, text: str) -> list[str]:
         return TOKEN_PATTERN.findall(self.normalize(text))
 
-    def fit(self, texts: list[str], min_frequency: int = 1) -> "SimpleTokenizer":
-        counts: Counter[str] = Counter()
+    def fit(self, texts: list[str], min_frequency: int=1) -> "SimpleTokenizer":
+        counts: Counter[str]=Counter()
         for text in texts:
             counts.update(self.tokenize(text))
         for token, count in sorted(counts.items()):
@@ -44,14 +44,14 @@ class SimpleTokenizer:
                 self._add_token(token)
         return self
 
-    def encode(self, text: str, add_special_tokens: bool = True) -> list[int]:
+    def encode(self, text: str, add_special_tokens: bool=True) -> list[int]:
         tokens = self.tokenize(text)
         if add_special_tokens:
             tokens = ["<bos>", *tokens, "<eos>"]
         unknown_id = self.token_to_id["<unk>"]
         return [self.token_to_id.get(token, unknown_id) for token in tokens]
 
-    def decode(self, ids: list[int], skip_special_tokens: bool = True) -> str:
+    def decode(self, ids: list[int], skip_special_tokens: bool=True) -> str:
         tokens = []
         special = set(self.special_tokens)
         for token_id in ids:

@@ -219,6 +219,15 @@ ExplainableLLM/
 │   ├── 02_transformer/
 │   ├── 03_LLM/
 │   ├── 04_RAG/
+│   │   ├── S01_documents.py
+│   │   ├── S02_chunking.py
+│   │   ├── S03_embeddings.py
+│   │   ├── S04_indexing.py
+│   │   ├── S05_retrieval.py
+│   │   ├── S06_reranking.py
+│   │   ├── S07_context.py
+│   │   ├── S08_rag_chain.py
+│   │   └── S09_citations.py
 │   ├── 05_vector_search/
 │   ├── 06_evaluation/
 │   ├── 07_tracing/
@@ -275,6 +284,27 @@ set GEMINI_API_KEY=your_api_key
 set GEMINI_MODEL=gemini-2.5-flash-lite
 poetry install --extras gemini
 poetry run python examples/gemini_flash_lite.py
+```
+
+Provider settings are stored in YAML files under `config/`.
+Use `config/gemini.yaml`, `config/chatgpt.yaml`, `config/claude.yaml`, or `config/ollama.yaml` as templates.
+Do not store API keys in YAML files. Use environment variables instead:
+
+- `GEMINI_API_KEY`
+- `OPENAI_API_KEY`
+- `ANTHROPIC_API_KEY`
+- `OLLAMA_HOST`
+
+The central client supports provider switching:
+
+```python
+from S01_client import LLMClient
+
+client = LLMClient(provider="gemini")
+client = LLMClient(provider="chatgpt")
+client = LLMClient(provider="claude")
+client = LLMClient(provider="llama")
+client = LLMClient.from_config("config/gemini.local.yaml")
 ```
 
 ## Example End-to-End Flow

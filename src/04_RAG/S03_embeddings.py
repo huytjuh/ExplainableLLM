@@ -14,7 +14,7 @@ class HashingEmbeddingModel:
     dependency-free, and good enough to teach vector search mechanics.
     """
 
-    def __init__(self, dimensions: int = 64) -> None:
+    def __init__(self, dimensions: int=64) -> None:
         self.dimensions = dimensions
 
     def embed(self, text: str) -> list[float]:

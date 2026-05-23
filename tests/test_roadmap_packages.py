@@ -1,4 +1,4 @@
-from gemini_flash_lite import GeminiFlashLiteClient
+from S01_client import GeminiFlashLiteClient
 from mcp_overview import mcp_learning_map
 from model_families import model_family_map
 from vector_search import InMemoryVectorStore

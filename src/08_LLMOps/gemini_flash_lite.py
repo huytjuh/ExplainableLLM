@@ -19,7 +19,7 @@ class GeminiResponse:
 
 
 class GeminiFlashLiteClient:
-    def __init__(self, api_key: str | None = None, model: str | None = None) -> None:
+    def __init__(self, api_key: str | None=None, model: str | None=None) -> None:
         self.api_key = api_key or os.getenv("GEMINI_API_KEY")
         self.model = model or os.getenv("GEMINI_MODEL", "gemini-2.5-flash-lite")
 

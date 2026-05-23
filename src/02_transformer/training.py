@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 
 
-def cross_entropy_loss(probabilities: list[float], target_index: int, epsilon: float = 1e-12) -> float:
+def cross_entropy_loss(probabilities: list[float], target_index: int, epsilon: float=1e-12) -> float:
     """Cross-entropy for one next-token target."""
 
     if target_index < 0 or target_index >= len(probabilities):
@@ -30,7 +30,7 @@ def adamw_update(
     gradient: float,
     *,
     learning_rate: float,
-    weight_decay: float = 0.01,
+    weight_decay: float=0.01,
 ) -> float:
     """A single educational AdamW-like step without moment history."""
 

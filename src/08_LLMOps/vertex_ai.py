@@ -9,7 +9,7 @@ from dataclasses import dataclass
 @dataclass(frozen=True)
 class VertexAIConfig:
     project_id: str
-    location: str = "us-central1"
+    location: str="us-central1"
 
     @classmethod
     def from_env(cls) -> "VertexAIConfig":

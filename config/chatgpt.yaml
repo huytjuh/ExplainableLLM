@@ -1,0 +1,15 @@
+# ChatGPT/OpenAI API config.
+# API key: set OPENAI_API_KEY in your environment.
+provider: chatgpt
+model: gpt-4.1-mini
+base_url: null
+
+generation:
+  temperature: 0.2
+  top_p: 0.95
+  top_k: 40
+  max_output_tokens: 512
+  stop_sequences: []
+  response_mime_type: null
+  system_instruction: You explain LLM concepts clearly for developers.
+

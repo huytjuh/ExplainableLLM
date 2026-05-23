@@ -1,0 +1,15 @@
+# Claude/Anthropic API config.
+# API key: set ANTHROPIC_API_KEY in your environment.
+provider: claude
+model: claude-3-5-haiku-latest
+base_url: null
+
+generation:
+  temperature: 0.2
+  top_p: 0.95
+  top_k: 40
+  max_output_tokens: 512
+  stop_sequences: []
+  response_mime_type: null
+  system_instruction: You explain LLM concepts clearly for developers.
+
