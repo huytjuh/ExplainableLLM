@@ -1,0 +1,28 @@
+trigger:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.11'
+
+  - script: |
+      python -m pip install --upgrade pip
+      pip install poetry
+      poetry install
+    displayName: Install package
+
+  - script: |
+      poetry run pytest
+    displayName: Run tests
+
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: 'artifacts'
+      artifact: 'llm-artifacts'
+      publishLocation: 'pipeline'
