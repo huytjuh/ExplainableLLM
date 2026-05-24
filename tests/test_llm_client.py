@@ -90,7 +90,12 @@ def test_settings_load_from_yaml(tmp_path):
 
 
 def test_committed_provider_yaml_files_load():
-    for path in ("config/gemini.yaml", "config/chatgpt.yaml", "config/claude.yaml", "config/ollama.yaml"):
+    for path in (
+        "config/providers/gemini.yaml",
+        "config/providers/chatgpt.yaml",
+        "config/providers/claude.yaml",
+        "config/providers/ollama.yaml",
+    ):
         settings = LLMSettings.from_yaml(path)
         assert settings.provider
         assert settings.model

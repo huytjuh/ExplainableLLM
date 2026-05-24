@@ -1,0 +1,17 @@
+label: mobiele app
+description: Feedback specifiek over de mobiele app.
+when_to_use:
+  - De klant noemt expliciet de app of mobiele applicatie.
+  - De ervaring speelt zich duidelijk af in de mobiele app.
+when_not_to_use:
+  - Gebruik "technisch probleem" als de app crasht of foutmeldingen geeft en dat het hoofdprobleem is.
+  - Gebruik "gebruiksgemak" als app alleen de context is, maar usability centraal staat.
+example_questions:
+  - Gaat de feedback specifiek over de mobiele app?
+  - Is de app het belangrijkste onderwerp van de feedback?
+examples:
+  - De app loopt vast.
+  - Ik kon mijn bestelling volgen in de app.
+extraction_tips:
+  - Let op woorden zoals app, mobiele app, Android en iPhone.
+  - Kies specifieker label als de feedback duidelijk over login, betaling of storing gaat.

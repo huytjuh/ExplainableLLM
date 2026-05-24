@@ -1,0 +1,17 @@
+label: gebruiksgemak
+description: Feedback over duidelijkheid, navigatie, eenvoud of gebruikservaring.
+when_to_use:
+  - De klant noemt overzichtelijkheid, eenvoud of onduidelijke navigatie.
+  - De klant kan iets wel doen, maar vindt het moeilijk of omslachtig.
+when_not_to_use:
+  - Gebruik "technisch probleem" als iets defect is of foutmeldingen geeft.
+  - Gebruik "proces" als het vooral gaat over een formele procedure met stappen.
+example_questions:
+  - Gaat de feedback over hoe makkelijk iets te gebruiken is?
+  - Is het probleem vooral onduidelijkheid of navigatie?
+examples:
+  - De app is overzichtelijk.
+  - Ik kon de juiste knop niet vinden.
+extraction_tips:
+  - Let op woorden zoals duidelijk, overzichtelijk, makkelijk, onduidelijk en vinden.
+  - Kies dit label bij usability-feedback.

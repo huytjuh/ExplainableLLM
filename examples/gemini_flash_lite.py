@@ -4,7 +4,7 @@ from S01_client import LLMClient, MissingAPIKeyError
 
 
 if __name__ == "__main__":
-    client = LLMClient.from_config("config/gemini.yaml")
+    client = LLMClient.from_config("config/providers/gemini.yaml")
     try:
         response = client.generate(
             "Explain tokenization in one sentence.",

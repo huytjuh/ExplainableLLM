@@ -1,0 +1,17 @@
+label: betaling
+description: Feedback over betalen, betaalmethoden, mislukte betalingen of terugbetalingen.
+when_to_use:
+  - De klant noemt een betaling, afschrijving, betaalmethode of refund.
+  - De betaling lukt niet of is dubbel uitgevoerd.
+when_not_to_use:
+  - Gebruik "facturatie" als het probleem vooral over een factuur of factuurbedrag gaat.
+  - Gebruik "retouren" als de terugbetaling onderdeel is van een retourproces.
+example_questions:
+  - Gaat de feedback vooral over het uitvoeren of verwerken van een betaling?
+  - Noemt de klant een betaalmethode, afschrijving of terugbetaling?
+examples:
+  - Mijn betaling is twee keer afgeschreven.
+  - iDEAL werkte niet tijdens het afrekenen.
+extraction_tips:
+  - Let op woorden zoals betaling, afschrijving, iDEAL, creditcard, refund en terugbetaling.
+  - Kies dit label bij betaaltransacties, niet bij administratieve factuurvragen.

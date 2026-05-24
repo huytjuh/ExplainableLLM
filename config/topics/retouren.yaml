@@ -1,0 +1,17 @@
+label: retouren
+description: Feedback over retourneren, retourlabels, retourstatus of retourvoorwaarden.
+when_to_use:
+  - De klant noemt retourneren, retourlabel of retourverwerking.
+  - Het probleem speelt tijdens of na het terugsturen van een product.
+when_not_to_use:
+  - Gebruik "betaling" als het alleen over terugbetaling gaat zonder retourcontext.
+  - Gebruik "proces" als retour slechts een voorbeeld is van bredere procesfrictie.
+example_questions:
+  - Gaat de feedback specifiek over retourneren?
+  - Worden retourlabel, retourstatus of retourvoorwaarden genoemd?
+examples:
+  - Ik kon het retourlabel niet vinden.
+  - Mijn retour is nog niet verwerkt.
+extraction_tips:
+  - Let op woorden zoals retour, retourneren, retourlabel, terugsturen en retourstatus.
+  - Kies dit label als retouren het hoofdonderwerp is.

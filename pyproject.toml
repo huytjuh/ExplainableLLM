@@ -5,7 +5,7 @@ description = "Implementation-level explanations and starter code for LLMs, RAG,
 authors = [{ name = "ExplainableLLM Contributors" }]
 readme = "README.md"
 requires-python = ">=3.10,<4.0"
-dependencies = ["PyYAML>=6.0.0"]
+dependencies = ["PyYAML>=6.0.0", "pydantic>=2.0.0"]
 
 [project.optional-dependencies]
 gemini = ["google-genai>=1.0.0"]

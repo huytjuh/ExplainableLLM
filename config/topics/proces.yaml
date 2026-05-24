@@ -1,0 +1,17 @@
+label: proces
+description: Feedback over stappen, procedures, formulieren of onduidelijke werkwijzen.
+when_to_use:
+  - De klant vindt een procedure onduidelijk, lang of omslachtig.
+  - De feedback gaat over stappen die iemand moet doorlopen.
+when_not_to_use:
+  - Gebruik "retouren" als het specifiek over terugsturen gaat.
+  - Gebruik "gebruiksgemak" als het vooral gaat over navigatie of interface-eenvoud.
+example_questions:
+  - Gaat de feedback over een procedure of reeks stappen?
+  - Is het probleem dat het proces onduidelijk of omslachtig is?
+examples:
+  - Het retourproces is onduidelijk.
+  - Het aanvraagformulier is te lang.
+extraction_tips:
+  - Let op woorden zoals proces, stappen, formulier, procedure en aanvraag.
+  - Kies dit label bij algemene procesfrictie.

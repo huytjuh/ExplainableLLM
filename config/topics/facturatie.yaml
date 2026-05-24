@@ -1,0 +1,17 @@
+label: facturatie
+description: Feedback over facturen, factuurcorrecties, bedragen of administratieve fouten.
+when_to_use:
+  - De klant noemt een factuur, factuurbedrag of correctie.
+  - De klant betwist administratieve kosten of wacht op een factuurcorrectie.
+when_not_to_use:
+  - Gebruik "betaling" als het vooral gaat over het betaalmoment of een mislukte betaling.
+  - Gebruik "klantenservice" als het vooral gaat over de reactie van support op de vraag.
+example_questions:
+  - Gaat de feedback over een factuur of factuurcorrectie?
+  - Klopt volgens de klant een bedrag of administratie niet?
+examples:
+  - Mijn factuur klopt niet.
+  - Ik wacht op een correctie van mijn factuur.
+extraction_tips:
+  - Let op woorden zoals factuur, bedrag, correctie, administratie en kosten.
+  - Kies dit label bij administratieve financiële fouten.

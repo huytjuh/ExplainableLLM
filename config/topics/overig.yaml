@@ -1,0 +1,17 @@
+label: overig
+description: Feedback die niet redelijk in een ander topic past.
+when_to_use:
+  - Geen ander topic past redelijk goed.
+  - De feedback is te algemeen of mist inhoudelijke context.
+when_not_to_use:
+  - Gebruik dit label niet als een specifieker topic uit de lijst verdedigbaar is.
+  - Gebruik dit label niet alleen omdat de tekst kort is.
+example_questions:
+  - Past geen enkel specifieker topic redelijk goed?
+  - Is de feedback te algemeen om een inhoudelijk onderwerp te bepalen?
+examples:
+  - Ik heb een algemene vraag.
+  - Mijn situatie staat niet in de lijst.
+extraction_tips:
+  - Gebruik "overig" spaarzaam.
+  - Verlaag de confidence score wanneer dit label wordt gekozen door gebrek aan informatie.

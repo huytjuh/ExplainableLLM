@@ -1,0 +1,17 @@
+label: inloggen
+description: Feedback over login, verificatiecodes, wachtwoorden of toegang.
+when_to_use:
+  - De klant kan niet inloggen of heeft problemen met verificatie.
+  - De klant noemt wachtwoord, toegang of verificatiecode.
+when_not_to_use:
+  - Gebruik "account" als het gaat over profielgegevens of accountbeheer na het inloggen.
+  - Gebruik "technisch probleem" als er vooral een foutmelding of storing wordt genoemd.
+example_questions:
+  - Gaat de feedback over toegang krijgen tot het account?
+  - Worden login, wachtwoord of verificatie genoemd?
+examples:
+  - De verificatiecode komt te laat binnen.
+  - Ik kan niet inloggen.
+extraction_tips:
+  - Let op woorden zoals inloggen, wachtwoord, toegang, verificatiecode en login.
+  - Kies dit label voor authenticatieproblemen.

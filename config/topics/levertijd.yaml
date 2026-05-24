@@ -1,0 +1,17 @@
+label: levertijd
+description: Feedback over vertraging, snelheid of duur van levering.
+when_to_use:
+  - De klant noemt vertraging, wachttijd of levering die te laat is.
+  - Het hoofdprobleem is hoe lang de levering duurt.
+when_not_to_use:
+  - Gebruik "bezorging" als het vooral gaat over het bezorgmoment, pakket of afleverlocatie.
+  - Gebruik "proces" als het vooral gaat over onduidelijke stappen of communicatie.
+example_questions:
+  - Gaat de feedback vooral over vertraging of wachttijd?
+  - Wordt genoemd dat de levering te laat of langzaam was?
+examples:
+  - De levering kwam drie dagen te laat.
+  - Ik wacht langer dan beloofd op mijn bestelling.
+extraction_tips:
+  - Let op woorden zoals te laat, vertraging, levertijd, wachten en beloofd.
+  - Kies dit label als tijdsduur centraal staat.

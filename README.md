@@ -287,7 +287,7 @@ poetry run python examples/gemini_flash_lite.py
 ```
 
 Provider settings are stored in YAML files under `config/`.
-Use `config/gemini.yaml`, `config/chatgpt.yaml`, `config/claude.yaml`, or `config/ollama.yaml` as templates.
+Use `config/providers/gemini.yaml`, `config/providers/chatgpt.yaml`, `config/providers/claude.yaml`, or `config/providers/ollama.yaml` as templates.
 Do not store API keys in YAML files. Use environment variables instead:
 
 - `GEMINI_API_KEY`
@@ -304,7 +304,7 @@ client = LLMClient(provider="gemini")
 client = LLMClient(provider="chatgpt")
 client = LLMClient(provider="claude")
 client = LLMClient(provider="llama")
-client = LLMClient.from_config("config/gemini.local.yaml")
+client = LLMClient.from_config("config/providers/gemini.local.yaml")
 ```
 
 ## Example End-to-End Flow

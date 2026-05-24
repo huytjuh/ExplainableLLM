@@ -1,0 +1,17 @@
+label: klantenservice
+description: Feedback over contact met supportmedewerkers, vriendelijkheid of oplossing.
+when_to_use:
+  - De klant beoordeelt hulp, reactie of contact met support.
+  - De feedback gaat over de medewerker of service-ervaring.
+when_not_to_use:
+  - Gebruik het onderliggende inhoudelijke topic als support alleen bijzaak is.
+  - Gebruik "proces" als het vooral gaat over formele stappen in plaats van menselijke ondersteuning.
+example_questions:
+  - Gaat de feedback vooral over hulp door een medewerker?
+  - Beoordeelt de klant vriendelijkheid, snelheid of duidelijkheid van support?
+examples:
+  - De medewerker heeft mij goed geholpen.
+  - Ik kreeg geen duidelijk antwoord van de klantenservice.
+extraction_tips:
+  - Let op woorden zoals medewerker, klantenservice, geholpen, antwoord en contact.
+  - Kies dit label als de service-ervaring centraal staat.

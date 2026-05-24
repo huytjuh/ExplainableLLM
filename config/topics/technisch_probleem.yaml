@@ -1,0 +1,17 @@
+label: technisch probleem
+description: Feedback over bugs, foutmeldingen, storingen of technische defecten.
+when_to_use:
+  - De klant noemt een foutmelding, crash, storing of defecte functie.
+  - Iets dat zou moeten werken werkt niet.
+when_not_to_use:
+  - Gebruik "functionaliteit" als de klant een ontbrekende functie wil.
+  - Gebruik "gebruiksgemak" als iets onduidelijk is maar wel werkt.
+example_questions:
+  - Beschrijft de klant een bug, foutmelding of storing?
+  - Werkt een bestaande functie niet zoals bedoeld?
+examples:
+  - De pagina geeft een foutmelding.
+  - De app crasht bij het openen.
+extraction_tips:
+  - Let op woorden zoals foutmelding, storing, crash, bug, werkt niet en vastlopen.
+  - Kies dit label bij defect gedrag.

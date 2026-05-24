@@ -24,7 +24,7 @@ def assert_equal(actual: object, expected: object, label: str) -> None:
 
 
 def test_settings_from_yaml() -> None:
-    settings = LLMSettings.from_yaml(REPO_ROOT / "config" / "gemini.yaml")
+    settings = LLMSettings.from_yaml(REPO_ROOT / "config" / "providers" / "gemini.yaml")
 
     assert_equal(settings.provider, "gemini", "provider")
     assert_equal(settings.model, "gemini-2.5-flash-lite", "model")

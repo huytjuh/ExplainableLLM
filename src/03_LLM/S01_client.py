@@ -1,5 +1,3 @@
-"""Universal LLM client with YAML-backed provider configs."""
-
 from __future__ import annotations
 
 import time
@@ -112,7 +110,7 @@ class GeminiClient(LLMClient):
 
     def _load_config(self) -> LLMSettings:
         """Load the Gemini config."""
-        config_path = Path("config/gemini.yaml")
+        config_path = Path("config/providers/gemini.yaml")
         if not config_path.is_absolute() and not config_path.exists():
             config_path = Path(__file__).resolve().parents[2] / config_path
 

@@ -1,0 +1,17 @@
+label: account
+description: Feedback over accountgegevens, profiel, registratie of accountbeheer.
+when_to_use:
+  - De klant noemt accountgegevens, profielinstellingen of registratie.
+  - De klant wil accountinformatie bekijken, aanpassen of beheren.
+when_not_to_use:
+  - Gebruik "inloggen" als het probleem vooral gaat over toegang, wachtwoord of verificatie.
+  - Gebruik "technisch probleem" als de accountpagina foutmeldingen geeft of crasht.
+example_questions:
+  - Gaat de feedback over accountgegevens of profielbeheer?
+  - Wil de klant iets wijzigen aan het account?
+examples:
+  - Mijn accountgegevens zijn niet juist.
+  - Ik wil mijn profiel aanpassen.
+extraction_tips:
+  - Let op woorden zoals account, profiel, gegevens, registratie en instellingen.
+  - Kies dit label alleen als accountbeheer het hoofdonderwerp is.

@@ -1,0 +1,17 @@
+label: bezorging
+description: Feedback over pakketbezorging, ontvangst, bezorgmoment of bezorgstatus.
+when_to_use:
+  - De klant noemt bezorging, pakketontvangst of bezorgstatus.
+  - Het probleem gaat over waar of hoe een bestelling is bezorgd.
+when_not_to_use:
+  - Gebruik "levertijd" als vooral de vertraging of duur centraal staat.
+  - Gebruik "retouren" als het gaat over terugsturen van een product.
+example_questions:
+  - Gaat de feedback over het bezorgproces of de bezorgstatus?
+  - Is het probleem dat het pakket niet of verkeerd is bezorgd?
+examples:
+  - Mijn pakket is niet aangekomen.
+  - De bezorger kwam niet op het afgesproken moment.
+extraction_tips:
+  - Let op woorden zoals pakket, bezorger, bezorging, afleveren en bezorgstatus.
+  - Kies dit label als bezorging zelf belangrijker is dan alleen de levertijd.

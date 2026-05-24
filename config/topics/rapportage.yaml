@@ -1,0 +1,17 @@
+label: rapportage
+description: Feedback over dashboards, rapporten, cijfers of exports.
+when_to_use:
+  - De klant noemt rapportages, dashboards, cijfers of analyse-overzichten.
+  - De klant wil data bekijken, filteren of exporteren.
+when_not_to_use:
+  - Gebruik "functionaliteit" als het vooral een algemeen feature request is.
+  - Gebruik "technisch probleem" als een rapportagepagina niet werkt.
+example_questions:
+  - Gaat de feedback over rapporten, dashboards of cijfers?
+  - Mist de klant een export, filter of overzicht?
+examples:
+  - Het dashboard bevat nuttige cijfers.
+  - De rapportage mist filters.
+extraction_tips:
+  - Let op woorden zoals dashboard, rapportage, cijfers, export, filter en Excel.
+  - Kies dit label als data-inzicht centraal staat.

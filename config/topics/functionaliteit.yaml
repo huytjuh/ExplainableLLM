@@ -1,0 +1,17 @@
+label: functionaliteit
+description: Feedback over ontbrekende of gewenste functies.
+when_to_use:
+  - De klant mist een functie of vraagt om extra mogelijkheden.
+  - De feedback gaat over wat het product wel of niet kan.
+when_not_to_use:
+  - Gebruik "technisch probleem" als een bestaande functie niet werkt.
+  - Gebruik "gebruiksgemak" als de functie bestaat maar lastig te vinden of te gebruiken is.
+example_questions:
+  - Vraagt de klant om een nieuwe of uitgebreidere functie?
+  - Gaat het om productmogelijkheden in plaats van een storing?
+examples:
+  - Ik mis een export naar Excel.
+  - De zoekfunctie zou uitgebreider moeten zijn.
+extraction_tips:
+  - Let op woorden zoals mis, functie, mogelijkheid, export, filter en ondersteuning.
+  - Kies dit label bij feature requests.
