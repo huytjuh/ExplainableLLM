@@ -1,0 +1,13 @@
+Document ID: EN-005
+Language: English
+Channel: Customer support email
+Topic: Subscription billing
+Sentiment: Negative
+Date: 2026-03-22
+
+I cancelled my premium delivery subscription on March 1, but I was charged again on March 20. The account page shows the subscription as inactive, so I do not understand why the renewal was processed. The invoice also lists the old renewal date, which makes the account status look unreliable.
+
+Support refunded the charge after I sent screenshots, but I should not have needed to prove that cancellation happened. Please make cancellation confirmations easier to find and ensure billing status matches the account page.
+
+Requested action: investigate subscription renewal logic and send a clear cancellation receipt by email.
+

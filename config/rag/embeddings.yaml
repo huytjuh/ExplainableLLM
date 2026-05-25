@@ -1,0 +1,109 @@
+active: local_hashing
+
+defaults:
+  normalize: true
+  batch_size: 64
+  cache_embeddings: true
+  cache_path: artifacts/embedding_cache
+  text_field: text
+  metadata_fields:
+    - source
+    - document_id
+    - chunk_index
+    - language
+
+embeddings:
+  local_hashing:
+    provider: local
+    model: hashing-vectorizer
+    implementation: HashingEmbeddingModel
+    description: Dependency-free embedding profile for learning vector search mechanics.
+    dimensions: 4096
+    normalize: true
+    batch_size: 64
+    api_key_env: null
+    cost: free
+    strengths:
+      - offline
+      - deterministic
+      - easy to test
+    limitations:
+      - weak semantic understanding
+      - poor multilingual matching
+      - intended for education, not production
+
+  openai_text_embedding_3_small:
+    provider: openai
+    model: text-embedding-3-small
+    implementation: OpenAIEmbeddings
+    description: Cost-efficient semantic embeddings for most RAG prototypes.
+    dimensions: 1536
+    normalize: true
+    batch_size: 128
+    input_type: document_and_query
+    api_key_env: OPENAI_API_KEY
+    strengths:
+      - semantic retrieval
+      - multilingual support
+      - strong default for customer feedback
+    best_for:
+      - prototypes
+      - bilingual English/Dutch feedback
+      - support ticket search
+
+  openai_text_embedding_3_large:
+    provider: openai
+    model: text-embedding-3-large
+    implementation: OpenAIEmbeddings
+    description: Higher-quality OpenAI embedding profile for harder retrieval tasks.
+    dimensions: 3072
+    normalize: true
+    batch_size: 64
+    input_type: document_and_query
+    api_key_env: OPENAI_API_KEY
+    strengths:
+      - stronger semantic matching
+      - better for nuanced queries
+      - good multilingual retrieval
+    best_for:
+      - production quality experiments
+      - longer documents
+      - high-recall retrieval
+
+  sentence_transformers_minilm:
+    provider: sentence_transformers
+    model: sentence-transformers/all-MiniLM-L6-v2
+    implementation: SentenceTransformer
+    description: Local open-source embedding model for offline semantic search.
+    dimensions: 384
+    normalize: true
+    batch_size: 64
+    device: cpu
+    api_key_env: null
+    strengths:
+      - local
+      - no API key
+      - better than hashing
+    limitations:
+      - weaker multilingual support than dedicated multilingual models
+
+  sentence_transformers_multilingual:
+    provider: sentence_transformers
+    model: sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+    implementation: SentenceTransformer
+    description: Local multilingual embedding model for English and Dutch content.
+    dimensions: 384
+    normalize: true
+    batch_size: 64
+    device: cpu
+    api_key_env: null
+    strengths:
+      - local multilingual retrieval
+      - good fit for English/Dutch feedback
+      - no hosted API dependency
+
+query_settings:
+  use_same_model_as_documents: true
+  query_prefix: null
+  document_prefix: null
+  fallback_profile: local_hashing

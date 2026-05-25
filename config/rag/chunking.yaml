@@ -1,0 +1,142 @@
+active: recursive_text
+
+defaults:
+  provider: local
+  keep_metadata: true
+  add_chunk_index: true
+  add_character_offsets: true
+  add_token_estimate: true
+  preserve_source_path: true
+
+chunking:
+  fixed_words:
+    provider: local
+    strategy: fixed_words
+    description: Simple word-window chunking for learning and small text files.
+    unit: word
+    chunk_size: 180
+    overlap: 30
+    separators:
+      - " "
+    best_for:
+      - tutorials
+      - short plain-text documents
+      - dependency-free examples
+
+  fixed_tokens:
+    provider: tokenizer
+    strategy: fixed_tokens
+    description: Split by model-token budget for predictable prompt sizing.
+    unit: token
+    tokenizer: cl100k_base
+    chunk_size: 800
+    overlap: 120
+    best_for:
+      - OpenAI embeddings
+      - production RAG
+      - mixed document lengths
+
+  recursive_text:
+    provider: local
+    strategy: recursive_text
+    description: Try larger natural boundaries first, then fall back to smaller ones.
+    unit: character
+    chunk_size: 1200
+    overlap: 180
+    separators:
+      - "\n\n"
+      - "\n"
+      - ". "
+      - "? "
+      - "! "
+      - "; "
+      - ", "
+      - " "
+      - ""
+    best_for:
+      - general documents
+      - PDFs after text extraction
+      - knowledge-base articles
+
+  paragraph:
+    provider: local
+    strategy: paragraph
+    description: Keep paragraphs intact where possible.
+    unit: paragraph
+    max_paragraphs_per_chunk: 3
+    overlap_paragraphs: 1
+    max_characters: 1600
+    best_for:
+      - customer feedback
+      - reviews
+      - support tickets
+      - policy text
+
+  sentence:
+    provider: local
+    strategy: sentence
+    description: Split on sentence boundaries and group nearby sentences.
+    unit: sentence
+    language_hint: auto
+    max_sentences_per_chunk: 8
+    overlap_sentences: 1
+    max_characters: 1200
+    best_for:
+      - short reviews
+      - chat transcripts
+      - multilingual feedback
+
+  markdown_headers:
+    provider: local
+    strategy: markdown_headers
+    description: Split Markdown by headings while preserving section hierarchy.
+    unit: section
+    headers:
+      - "#"
+      - "##"
+      - "###"
+    include_header_path: true
+    max_characters: 1800
+    best_for:
+      - README files
+      - technical documentation
+      - runbooks
+
+  parent_child:
+    provider: local
+    strategy: parent_child
+    description: Index small child chunks, but return larger parent sections as context.
+    return_parent: true
+    parent:
+      strategy: recursive_text
+      chunk_size: 2400
+      overlap: 200
+    child:
+      strategy: recursive_text
+      chunk_size: 500
+      overlap: 80
+    best_for:
+      - higher recall
+      - answers that need surrounding context
+      - long documents
+
+  semantic:
+    provider: embedding
+    strategy: semantic
+    description: Split when the topic changes using embedding similarity.
+    embedding_profile: openai_text_embedding_3_small
+    similarity_threshold: 0.72
+    min_characters: 300
+    max_characters: 1800
+    best_for:
+      - long mixed-topic documents
+      - reports
+      - research notes
+
+recommended_by_document_type:
+  txt: paragraph
+  md: markdown_headers
+  pdf: recursive_text
+  html: recursive_text
+  csv_feedback: sentence
+  customer_ticket: paragraph

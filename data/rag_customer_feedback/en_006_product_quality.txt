@@ -1,0 +1,13 @@
+Document ID: EN-006
+Language: English
+Channel: Product review
+Topic: Product quality
+Sentiment: Mixed
+Date: 2026-03-26
+
+The reusable water bottle has a great design and keeps drinks cold for most of the day. The color matches the website photos, and the cap feels sturdy. However, the rubber seal came loose after one week of normal use. It can be pushed back into place, but it falls out again when I wash the bottle.
+
+I would buy this product again if the seal were improved. Right now it feels like a small part is making an otherwise excellent product unreliable.
+
+Requested action: review seal durability and offer replacement seals as spare parts.
+

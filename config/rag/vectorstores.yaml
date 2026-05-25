@@ -1,0 +1,163 @@
+active: in_memory
+
+defaults:
+  metric: cosine
+  top_k: 5
+  score_threshold: null
+  include_text: true
+  include_metadata: true
+  include_values: false
+  id_field: id
+  text_field: text
+  vector_field: embedding
+  metadata_field: metadata
+
+vector_stores:
+  in_memory:
+    provider: in_memory
+    implementation: InMemoryVectorStore
+    description: Dependency-free vector store for learning and tests.
+    metric: cosine
+    persist: false
+    persist_path: null
+    index_name: null
+    collection_name: null
+    best_for:
+      - unit tests
+      - tutorials
+      - tiny datasets
+    limitations:
+      - no persistence
+      - linear scan
+      - not suitable for large datasets
+
+  faiss_flat:
+    provider: faiss
+    implementation: FAISS
+    description: Local FAISS index with exact nearest-neighbor search.
+    index_type: IndexFlatIP
+    metric: cosine
+    persist: true
+    persist_path: artifacts/vector_indexes/faiss/customer_feedback
+    dimensions_from_embedding_profile: true
+    metadata_store:
+      provider: jsonl
+      path: artifacts/vector_indexes/faiss/customer_feedback/metadata.jsonl
+    best_for:
+      - local RAG
+      - notebooks
+      - fast prototyping
+    notes:
+      - Use normalized embeddings when using inner product for cosine-style search.
+
+  faiss_hnsw:
+    provider: faiss
+    implementation: FAISS
+    description: Local FAISS approximate index for larger datasets.
+    index_type: IndexHNSWFlat
+    metric: cosine
+    persist: true
+    persist_path: artifacts/vector_indexes/faiss_hnsw/customer_feedback
+    dimensions_from_embedding_profile: true
+    hnsw:
+      m: 32
+      ef_construction: 200
+      ef_search: 64
+    metadata_store:
+      provider: jsonl
+      path: artifacts/vector_indexes/faiss_hnsw/customer_feedback/metadata.jsonl
+    best_for:
+      - larger local indexes
+      - faster approximate search
+
+  chromadb_local:
+    provider: chromadb
+    implementation: PersistentClient
+    description: Local ChromaDB collection for RAG prototypes.
+    mode: persistent_client
+    metric: cosine
+    persist: true
+    persist_path: artifacts/vector_indexes/chromadb
+    collection_name: customer_feedback
+    collection_metadata:
+      "hnsw:space": cosine
+    best_for:
+      - local apps
+      - RAG prototypes
+      - storing text, embeddings, and metadata together
+
+  chromadb_server:
+    provider: chromadb
+    implementation: HttpClient
+    description: ChromaDB server profile for a shared local or remote service.
+    mode: http_client
+    host: localhost
+    port: 8000
+    ssl: false
+    collection_name: customer_feedback
+    metric: cosine
+    auth_token_env: CHROMA_SERVER_AUTHN_CREDENTIALS
+    best_for:
+      - shared development server
+      - separating app runtime from vector storage
+
+  pinecone_serverless:
+    provider: pinecone
+    implementation: Pinecone
+    description: Managed Pinecone serverless vector index.
+    index_name: customer-feedback
+    namespace: rag-learning
+    cloud: aws
+    region: us-east-1
+    metric: cosine
+    dimensions_from_embedding_profile: true
+    create_if_missing: true
+    deletion_protection: disabled
+    api_key_env: PINECONE_API_KEY
+    best_for:
+      - managed cloud RAG
+      - production-style experiments
+      - larger datasets without managing infra
+
+  mongodb_atlas:
+    provider: mongodb_atlas
+    implementation: AtlasVectorSearch
+    description: MongoDB Atlas Vector Search with metadata and vectors in one collection.
+    database: rag_learning
+    collection: customer_feedback_chunks
+    vector_index_name: customer_feedback_vector_index
+    metric: cosine
+    dimensions_from_embedding_profile: true
+    uri_env: MONGODB_URI
+    fields:
+      id: id
+      text: text
+      vector: embedding
+      metadata: metadata
+      source: metadata.source
+      language: metadata.language
+    filters:
+      allowed_metadata_fields:
+        - source
+        - document_id
+        - language
+        - topic
+        - sentiment
+        - date
+    best_for:
+      - apps already using MongoDB
+      - structured filters plus vector search
+      - customer feedback records
+
+retrieval:
+  default_top_k: 5
+  max_top_k: 20
+  reranking:
+    enabled: false
+    provider: none
+    model: null
+    top_n: 5
+  hybrid_search:
+    enabled: false
+    keyword_weight: 0.3
+    vector_weight: 0.7

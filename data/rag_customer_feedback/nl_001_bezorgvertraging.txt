@@ -1,0 +1,13 @@
+Document ID: NL-001
+Language: Dutch
+Channel: Klantenservice e-mail
+Topic: Bezorgvertraging
+Sentiment: Negatief
+Date: 2026-03-05
+
+Ik heb op 27 februari een bureaustoel besteld met de belofte dat deze binnen drie werkdagen geleverd zou worden. De track-and-trace bleef vier dagen op "aangemeld bij vervoerder" staan. Daardoor wist ik niet of het pakket al onderweg was of nog in het magazijn lag.
+
+De stoel is uiteindelijk op 5 maart aangekomen en het product zelf is goed. Het probleem is vooral de communicatie. Als een levering vertraging heeft, wil ik automatisch een update ontvangen in plaats van zelf steeds de status te controleren.
+
+Gevraagde actie: stuur proactieve vertragingupdates en toon een realistischer bezorgvenster.
+

@@ -1,0 +1,13 @@
+Document ID: EN-002
+Language: English
+Channel: Web review
+Topic: Returns
+Sentiment: Mixed
+Date: 2026-03-09
+
+The jacket looked premium online, but the sleeves were much longer than expected. Starting the return was easy, and the return label arrived by email within a minute. The confusing part was the policy text. One page said refunds are processed within five business days, while another page said ten business days after warehouse inspection.
+
+Customer support answered quickly and confirmed that my refund would be processed after the warehouse scan. I appreciate the fast response, but the policy should use the same wording everywhere. The return flow itself is good; the information around it is inconsistent.
+
+Requested action: align refund timing across the help center, checkout page, and return confirmation email.
+

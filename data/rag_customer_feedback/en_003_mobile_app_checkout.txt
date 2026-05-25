@@ -1,0 +1,13 @@
+Document ID: EN-003
+Language: English
+Channel: In-app feedback
+Topic: Mobile app checkout
+Sentiment: Negative
+Date: 2026-03-15
+
+The mobile app is smooth until the payment step. I added three home-office items to my cart, used a discount code, and selected PayPal. After approving payment, the app returned to an empty cart and did not show an order confirmation. I waited ten minutes, checked my email, and still had no confirmation.
+
+The charge appeared as pending in my payment account. Support later confirmed that no order was created and told me the authorization would expire automatically. That is stressful for customers. If payment fails, the app should keep the cart and show a clear message instead of clearing everything.
+
+Requested action: preserve cart contents after failed payment authorization and show a visible error state.
+

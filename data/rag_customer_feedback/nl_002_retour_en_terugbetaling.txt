@@ -1,0 +1,13 @@
+Document ID: NL-002
+Language: Dutch
+Channel: Webformulier
+Topic: Retour en terugbetaling
+Sentiment: Gemengd
+Date: 2026-03-11
+
+Het retourproces voor mijn hardloopschoenen was makkelijk te starten. Ik kon direct een label downloaden en het pakket afgeven bij een pakketpunt in de buurt. Daarna werd het onduidelijk. In mijn account stond dat de retour was ontvangen, maar ik kreeg pas zes dagen later bericht over de terugbetaling.
+
+De klantenservice was vriendelijk en gaf aan dat het magazijn de retour nog moest controleren. Dat begrijp ik, maar de status in mijn account gaf de indruk dat alles al afgerond was. De tekst zou duidelijker moeten maken welke stap nog openstaat.
+
+Gevraagde actie: maak onderscheid tussen "retour ontvangen" en "terugbetaling goedgekeurd".
+

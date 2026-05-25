@@ -1,0 +1,13 @@
+Document ID: NL-005
+Language: Dutch
+Channel: Klantenservice e-mail
+Topic: Facturatie
+Sentiment: Negatief
+Date: 2026-03-23
+
+Mijn zakelijke factuur bevat een verkeerd btw-nummer, terwijl het juiste nummer wel in mijn account staat. Ik heb geprobeerd de factuur opnieuw te downloaden na het aanpassen van mijn bedrijfsgegevens, maar de oude gegevens blijven zichtbaar.
+
+Voor mijn administratie heb ik een correcte factuur nodig. De klantenservice gaf aan dat dit handmatig moet worden aangepast door de financiele afdeling. Dat is prima, maar ik zou verwachten dat facturen voor zakelijke klanten opnieuw kunnen worden gegenereerd met actuele bedrijfsgegevens.
+
+Gevraagde actie: bied een optie om een gecorrigeerde factuur aan te vragen of automatisch opnieuw te genereren.
+

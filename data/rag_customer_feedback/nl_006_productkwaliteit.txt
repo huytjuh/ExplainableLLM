@@ -1,0 +1,13 @@
+Document ID: NL-006
+Language: Dutch
+Channel: Productreview
+Topic: Productkwaliteit
+Sentiment: Gemengd
+Date: 2026-03-28
+
+De noise-cancelling koptelefoon zit comfortabel en het geluid is helder. Voor thuiswerken is het product erg fijn, vooral tijdens videogesprekken. Toch valt de verbinding soms kort weg wanneer ik tussen mijn laptop en telefoon wissel.
+
+De handleiding legt multipoint-verbinding uit, maar niet wat je moet doen als het schakelen vastloopt. Na het opnieuw koppelen werkt alles weer, maar dit gebeurt meerdere keren per week. Het product is goed, maar de software voelt nog niet stabiel.
+
+Gevraagde actie: verbeter bluetooth-stabiliteit en voeg troubleshooting toe aan de handleiding.
+

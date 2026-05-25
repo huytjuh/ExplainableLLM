@@ -1,0 +1,13 @@
+Document ID: EN-001
+Language: English
+Channel: Customer support email
+Topic: Delivery delay
+Sentiment: Negative
+Date: 2026-03-04
+
+I ordered a wireless keyboard and laptop stand on February 25 with promised delivery within two business days. The tracking page first showed "ready for dispatch" and then did not change for five days. I contacted support twice and both agents were polite, but neither could explain whether the package had actually left the warehouse.
+
+The order finally arrived on March 4. The products were fine, but I had already bought a temporary keyboard from another store because I needed it for work. I would like clearer status updates when a shipment is delayed, especially if the delivery promise changes after checkout.
+
+Requested action: refund the express delivery fee and improve proactive delay notifications.
+

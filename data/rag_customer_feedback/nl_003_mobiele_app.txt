@@ -1,0 +1,13 @@
+Document ID: NL-003
+Language: Dutch
+Channel: App feedback
+Topic: Mobiele app
+Sentiment: Negatief
+Date: 2026-03-14
+
+De app werkt snel bij zoeken en filteren, maar loopt vast zodra ik mijn adres wil wijzigen tijdens het afrekenen. Ik tik op "adres bewerken", pas het huisnummer aan en druk op opslaan. Daarna blijft het laadicoon draaien en kan ik alleen nog terug naar het winkelmandje.
+
+Ik heb de bestelling uiteindelijk via de website geplaatst. Dat ging wel goed, maar het voelt onbetrouwbaar als basisgegevens in de app niet kunnen worden aangepast. Vooral bij een cadeauzending moet het afleveradres zonder problemen te wijzigen zijn.
+
+Gevraagde actie: los de fout in adresbewerking op en voeg een duidelijke foutmelding toe als opslaan mislukt.
+

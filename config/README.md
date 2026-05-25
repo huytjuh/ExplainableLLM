@@ -6,6 +6,7 @@ Use the committed provider YAML files as templates:
 - `providers/chatgpt.yaml`
 - `providers/claude.yaml`
 - `providers/ollama.yaml`
+- `rag/rag.yaml`
 
 Create a local file such as `gemini.local.yaml` for machine-specific settings. Keep API keys out of YAML and set them as environment variables:
 
