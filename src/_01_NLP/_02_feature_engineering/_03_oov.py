@@ -1,133 +1,27 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
-
-
-BASIC_ENGLISH_VOCAB = {
-    "account",
-    "and",
-    "app",
-    "at",
-    "checkout",
-    "crashes",
-    "crashing",
-    "customer",
-    "delivery",
-    "failed",
-    "invoice",
-    "is",
-    "keeps",
-    "late",
-    "login",
-    "missing",
-    "not",
-    "order",
-    "payment",
-    "processed",
-    "product",
-    "refund",
-    "return",
-    "service",
-    "slow",
-    "support",
-    "the",
-    "was",
-}
-
-BASIC_DUTCH_VOCAB = {
-    "account",
-    "app",
-    "betaling",
-    "bezorging",
-    "dat",
-    "de",
-    "een",
-    "en",
-    "factuur",
-    "geen",
-    "het",
-    "ik",
-    "inloggen",
-    "kan",
-    "klantenservice",
-    "klopt",
-    "levering",
-    "mijn",
-    "moet",
-    "niet",
-    "order",
-    "product",
-    "reageerde",
-    "retour",
-    "service",
-    "te",
-    "terugbetaling",
-    "wachten",
-    "werkt",
-    "zegt",
-}
-
 
 @dataclass(frozen=True)
 class OOVFeatures:
     word: str
-    normalized: str
-    language: str | None
-    in_vocabulary: bool
-    oov: bool
-    source: str | None
-
 
 @dataclass(frozen=True)
 class OOVText:
     text: str
     features: list[OOVFeatures]
 
-    @property
-    def oov_count(self) -> int:
-        return sum(feature.oov for feature in self.features)
-
-    @property
-    def token_count(self) -> int:
-        return len(self.features)
-
-    @property
-    def oov_ratio(self) -> float:
-        if not self.features:
-            return 0.0
-        return self.oov_count / self.token_count
-
-
 @dataclass
 class OOVConfig:
     languages: tuple[str, ...] = ("en", "nl")
-    alpha_only: bool = True
-    lowercase: bool = True
-    use_basic_vocab: bool = True
-    use_spacy_vectors: bool = False
-    spacy_models: dict[str, str] = field(
-        default_factory=lambda: {
-            "en": "en_core_web_md",
-            "nl": "nl_core_news_md",
-        }
-    )
-    extra_vocabulary: set[str] = field(default_factory=set)
-    vocabulary_by_language: dict[str, set[str]] = field(default_factory=dict)
 
 
 class OutOfVocabulary:
-    """Extract Dutch/English out-of-vocabulary features from tokenized text.
-
-    The default vocabulary is intentionally small and domain-oriented. For real
-    projects, pass a training-corpus vocabulary or domain lexicon through
-    OOVConfig.extra_vocabulary / vocabulary_by_language.
-    """
+    """Extract Dutch/English out-of-vocabulary features from tokenized text."""
 
     def __init__(self, config: OOVConfig | None = None) -> None:
         self.config = config or OOVConfig()
-        self._spacy_pipelines: dict[str, Any | None] = {}
-        self._vocabulary_by_language = self._build_vocabulary_by_language()
 
     def extract_word(self, word: str, language: str | None = None) -> OOVFeatures:
         normalized = self._normalize(word)

@@ -44,11 +44,11 @@ class TokenizedText:
     sent_tokens: list[SentenceToken]
 
     @property
-    def words(self) -> list[str]:
+    def get_words(self) -> list[str]:
         return [token.word for token in self.word_tokens if token.is_alpha]
     
     @property
-    def sentences(self) -> list[str]:
+    def get_sentences(self) -> list[str]:
         return [sent.sentence for sent in self.sent_tokens]
 
 

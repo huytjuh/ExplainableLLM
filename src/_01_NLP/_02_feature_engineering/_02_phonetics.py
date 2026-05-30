@@ -13,12 +13,22 @@ class PhoneticFeatures:
     metaphone: str | None
     nysiis: str | None
 
-
 @dataclass(frozen=True)
 class PhoneticText:
     text: str
     features: list[PhoneticFeatures]
 
+    @property
+    def get_soundexes(self) -> list[str]:
+        return [feature.soundex for feature in self.features if feature.soundex]
+
+    @property
+    def get_metaphones(self) -> list[str]:
+        return [feature.metaphone for feature in self.features if feature.metaphone]
+
+    @property
+    def get_nysiises(self) -> list[str]:
+        return [feature.nysiis for feature in self.features if feature.nysiis]
 
 @dataclass
 class PhoneticConfig:
@@ -50,7 +60,7 @@ class Phonetics:
 
     def extract(self, tokenized: Any) -> PhoneticText:
         """Extract phonetic features from tokenized text."""
-        phonetic_features = [self.extract_word(token.word) for token in tokenized.word_tokens if token.is_alpha]
+        phonetic_features = [self.extract_word(word) for word in tokenized.get_words]
 
         return PhoneticText(
             text=tokenized.text,

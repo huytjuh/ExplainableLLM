@@ -36,6 +36,7 @@ class LexicalText:
 class LexicalConfig:
     basic: bool = True
 
+
 class Lexical:
     """Extract lexical features such as word length, alphabetic status, stop word status, and uppercase status."""
 
@@ -55,8 +56,7 @@ class Lexical:
     
     def extract(self, tokenized: Any) -> LexicalText:
         """Extract lexical features from tokenized text."""
-        lexical_features = [self.extract_word(token.word) for token in tokenized.word_tokens if token.is_alpha]
-
+        lexical_features = [self.extract_word(word) for word in tokenized.get_words]
         return LexicalText(
             text=tokenized.text,
             features=lexical_features
