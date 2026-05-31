@@ -13,8 +13,8 @@ from langdetect.lang_detect_exception import LangDetectException
 DetectorFactory.seed = 42
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-SPACY_EN = PROJECT_ROOT / "models/spacy/en_core_web_sm-3.8.0"
-SPACY_NL = PROJECT_ROOT / "models/spacy/nl_core_news_sm-3.8.0"
+SPACY_EN = PROJECT_ROOT / "models/spacy/en_core_web_sm/en_core_web_sm-3.8.0"
+SPACY_NL = PROJECT_ROOT / "models/spacy/nl_core_news_sm/nl_core_news_sm-3.8.0"
 
 
 @dataclass(frozen=True)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import spacy
@@ -13,8 +13,8 @@ from langdetect.lang_detect_exception import LangDetectException
 DetectorFactory.seed = 42
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-SPACY_EN = PROJECT_ROOT / "models/spacy/en_core_web_sm-3.8.0"
-SPACY_NL = PROJECT_ROOT / "models/spacy/nl_core_news_sm-3.8.0"
+SPACY_EN = PROJECT_ROOT / "models/spacy/en_core_web_sm/en_core_web_sm-3.8.0"
+SPACY_NL = PROJECT_ROOT / "models/spacy/nl_core_news_sm/nl_core_news_sm-3.8.0"
 
 
 @dataclass(frozen=True)
@@ -35,6 +35,11 @@ class SentenceToken:
     language: str
     tokens: list[WordToken]
 
+    @property 
+    def get_words(self) -> list[str]:
+        return [token.word for token in self.tokens if token.is_alpha]
+    
+
 
 @dataclass(frozen=True)
 class TokenizedText:
@@ -50,6 +55,10 @@ class TokenizedText:
     @property
     def get_sentences(self) -> list[str]:
         return [sent.sentence for sent in self.sent_tokens]
+    
+    @property 
+    def get_languages(self) -> list[str]:
+        return [sent.language for sent in self.sent_tokens for token in sent.tokens if token.is_alpha]
 
 
 @dataclass
@@ -58,7 +67,6 @@ class TokenizerConfig:
     dutch: bool = True
     sentencizer: bool = True
     keep_hyphens: bool = True
-
 
 class Tokenizer:
     """Two-stage tokenizer with optional English and Dutch spaCy enrichment."""
