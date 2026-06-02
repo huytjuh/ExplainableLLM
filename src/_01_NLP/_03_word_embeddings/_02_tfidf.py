@@ -7,48 +7,72 @@ from typing import Any
 import numpy as np
 
 
-@dataclass(frozen=True)
-class TfidfModel:
-    vocabulary_: dict[str, int]
-    feature_names_: list[str]
-    idf_: list[float]
-    normalize: bool = True
+@dataclass
+class TfidfConfig:
+    max_features: int = 5000
+    min_df: int = 2
+    max_df: float = 0.95
 
-    def transform(self, documents: list[str] | TokenizedCorpus) -> list[list[float]]:
-        corpus = tokenize_corpus(documents) if documents and isinstance(documents[0], str) else documents
-        rows: list[list[float]] = []
-        for tokens in corpus:
-            counts = Counter(token for token in tokens if token in self.vocabulary_)
-            total = sum(counts.values()) or 1
-            row = [0.0 for _ in self.feature_names_]
-            for token, count in counts.items():
-                index = self.vocabulary_[token]
-                tf = count / total
-                row[index] = tf * self.idf_[index]
-            rows.append(l2_normalize(row) if self.normalize else row)
-        return rows
+    stop_words: bool = False
+
+    smooth_idf: bool = True
 
 
-def fit_tfidf(
-    documents: list[str] | TokenizedCorpus,
-    min_count: int = 1,
-    smooth_idf: bool = True,
-    normalize: bool = True,
-) -> TfidfModel:
-    """Fit term-frequency inverse-document-frequency vectors from scratch."""
-    corpus = tokenize_corpus(documents) if documents and isinstance(documents[0], str) else documents
-    vocabulary, feature_names = build_vocab(corpus, min_count=min_count)
-    document_frequency = [0 for _ in feature_names]
-    for tokens in corpus:
-        seen = {token for token in tokens if token in vocabulary}
-        for token in seen:
-            document_frequency[vocabulary[token]] += 1
+class Tfidf:
+    """Simple TF-IDF embedding extractor."""
 
-    n_documents = len(corpus)
-    idf: list[float] = []
-    for df in document_frequency:
-        if smooth_idf:
-            idf.append(math.log((1 + n_documents) / (1 + df)) + 1.0)
-        else:
-            idf.append(math.log(n_documents / df) if df else 0.0)
-    return TfidfModel(vocabulary, feature_names, idf, normalize=normalize)
+    def __init__(self, config: TfidfConfig | None = None) -> None:
+        """Initialize the TF-IDF embedding extractor with the given configuration."""
+        self.config = config or TfidfConfig()
+
+        self.vocabulary: list[str] = []
+        self.idf: np.ndarray | None = None
+        
+    def fit(self, corpus: list[Any]) -> 'Tfidf':
+        """Fit the TF-IDF model to the provided documents."""
+        tokens = [token for tokenized_text in corpus for token in tokenized_text.get_words(self.config.stop_words)]
+        token_counts = Counter(tokens)
+
+        max_df_threshold = int(self.config.max_df * len(corpus)) if isinstance(self.config.max_df, float) else self.config.max_df
+        self.vocabulary = [word for word, count in sorted(token_counts.items()) if count >= self.config.min_df and count <= max_df_threshold][:self.config.max_features]
+
+        # INVERSE DOCUMENT FREQUENCY
+        doc_counts = Counter()
+        for tokenized_text in corpus:
+            doc_counts.update(tokenized_text.get_words(self.config.stop_words))
+        document_frequency = np.array([doc_counts[word] for word in self.vocabulary], dtype=int)
+
+        self.idf = self._inverse_document_frequency(document_frequency, len(corpus))
+
+        return self 
+    
+    def _inverse_document_frequency(self, document_frequency: np.ndarray, n_documents: int) -> np.ndarray:
+        """Calculate the inverse document frequency for each token in the vocabulary."""
+        if self.config.smooth_idf:
+            document_frequency += 1
+            n_documents += 1
+            
+        return np.log((n_documents) / document_frequency) + 1.0
+    
+    def _term_frequency(self, tokens: list[str]) -> np.ndarray:
+        """Calculate the term frequency for each token in the vocabulary."""
+        token_counts = Counter(tokens)
+        return np.array([token_counts[word] / len(tokens) for word in self.vocabulary], dtype=float)
+
+    def transform(self, corpus: list[Any]) -> np.ndarray:
+        """Transform documents into TF-IDF embeddings using the fitted model."""
+        if not self.vocabulary or self.idf is None:
+            raise ValueError("The TF-IDF model must be fitted before transformation.")
+        
+        # TERM FREQUENCY * INVERSE DOCUMENT FREQUENCY
+        embeddings = np.zeros((len(corpus), len(self.vocabulary)), dtype=float)
+        for i, tokenized_text in enumerate(corpus):
+            tokens = tokenized_text.get_words(self.config.stop_words)
+            tf = self._term_frequency(tokens)
+            embeddings[i] = tf * self.idf
+        
+        return embeddings
+
+    def fit_transform(self, corpus: list[Any]) -> np.ndarray:
+        """Fit the model and return TF-IDF embeddings for the same corpus."""
+        return self.fit(corpus).transform(corpus)

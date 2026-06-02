@@ -24,9 +24,9 @@ class BagOfWords:
     def fit(self, corpus: list[Any]) -> 'BagOfWords':
         """Fit the BoW vocabulary to the provided documents."""
         tokens = [token for tokenized_text in corpus for token in tokenized_text.get_words(self.config.stop_words)]
-        dict_counts = Counter(tokens)
+        token_counts = Counter(tokens)
 
-        self.vocabulary = [word for word, count in sorted(dict_counts.items()) if count >= self.config.min_frequency]
+        self.vocabulary = [word for word, count in sorted(token_counts.items()) if count >= self.config.min_frequency]
         return self
 
     def transform(self, corpus: list[Any]) -> np.ndarray:
