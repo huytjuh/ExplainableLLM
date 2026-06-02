@@ -1685,6 +1685,18 @@ files = [
 windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
+name = "pyspellchecker"
+version = "0.8.4"
+description = "Pure python spell checker based on work by Peter Norvig"
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "pyspellchecker-0.8.4-py3-none-any.whl", hash = "sha256:20c53d119568011bbaef68608aceb956b888bcd9d563798f7770721a112b8255"},
+    {file = "pyspellchecker-0.8.4.tar.gz", hash = "sha256:48cafa76d65c30ce4d81d0831938f25e8f34ede243c1cc6840014b0eb51ad629"},
+]
+
+[[package]]
 name = "pytest"
 version = "9.0.3"
 description = "pytest: simple powerful testing with Python"
@@ -2572,4 +2584,4 @@ openai = ["openai"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.15"
-content-hash = "5bbf062595360b783c65526179eacfd87c5a8715b679078220580f7e116715bd"
+content-hash = "83c5b820e28489e9280ffa6edea281bb4c7231d73d040985e41261f4c0e01334"

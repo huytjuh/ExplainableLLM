@@ -5,7 +5,7 @@ description = "Implementation-level explanations and starter code for LLMs, RAG,
 authors = [{ name = "ExplainableLLM Contributors" }]
 readme = "README.md"
 requires-python = ">=3.10,<3.15"
-dependencies = ["PyYAML>=6.0.0", "pydantic>=2.0.0", "spacy (>=3.8.14,<4.0.0)", "click (>=8.4.1,<9.0.0)", "langdetect (>=1.0.9,<2.0.0)", "jellyfish (>=1.2.0,<2.0.0)"]
+dependencies = ["PyYAML>=6.0.0", "pydantic>=2.0.0", "spacy (>=3.8.14,<4.0.0)", "click (>=8.4.1,<9.0.0)", "langdetect (>=1.0.9,<2.0.0)", "jellyfish (>=1.2.0,<2.0.0)", "pyspellchecker (>=0.8.3,<0.9.0)"]
 
 [project.optional-dependencies]
 nlp = ["spacy>=3.7.0", "fasttext>=0.9.3"]

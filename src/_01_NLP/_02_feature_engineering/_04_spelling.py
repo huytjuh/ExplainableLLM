@@ -2,143 +2,140 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
-import spacy
-from spacy.tokens import Token
-from spacy.util import compile_infix_regex
-from langdetect import detect, DetectorFactory
-from langdetect.lang_detect_exception import LangDetectException
-
-
-DetectorFactory.seed = 42
-
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
-SPACY_EN = PROJECT_ROOT / "models/spacy/en_core_web_sm/en_core_web_sm-3.8.0"
-SPACY_NL = PROJECT_ROOT / "models/spacy/nl_core_news_sm/nl_core_news_sm-3.8.0"
+from spellchecker import SpellChecker
 
 
 @dataclass(frozen=True)
-class WordToken:
-    word: str
-    is_alpha: bool
-    is_stop: bool
-    lemma: str | None = None
-    pos: str | None = None
-    tag: str | None = None
-    dep: str | None = None
-    shape: str | None = None
+class SpellingFeatures:
+    word: str 
 
+    is_misspelled: bool
+    grammar: bool
+    typo: bool
 
-@dataclass(frozen=True)
-class SentenceToken:
-    sentence: str
-    language: str
-    tokens: list[WordToken]
+    word_corrected: str | None = None
+    levenshtein_distance: int | None = None
+    dam_levenshtein_distance: int | None = None
+    jaro_winkler_similarity: float | None = None
 
+    phonetic_soundex: str | None = None
+    phonetic_metaphone: str | None = None
+    phonetic_nysiis: str | None = None
 
 @dataclass(frozen=True)
-class TokenizedText:
+class SpellingText:
     text: str
-    language: str
-    word_tokens: list[WordToken]
-    sent_tokens: list[SentenceToken]
+    features: list[SpellingFeatures]
 
+    @property
+    def misspelled_words(self) -> list[str]:
+        return [feature.word for feature in self.features if feature.is_misspelled]
+    
+    @property
+    def misspelled_count(self) -> int:
+        return sum(feature.is_misspelled for feature in self.features)
+    
+    @property
+    def misspelled_ratio(self) -> float:
+        return self.misspelled_count / len(self.features) if self.features else 0.0
+    
+    @property
+    def grammar_ratio(self) -> float:
+        return self.grammar_count / len(self.features) if self.features else 0.0
 
+    @property
+    def typo_ratio(self) -> float:
+        return self.typo_count / len(self.features) if self.features else 0.0
+    
 @dataclass
-class TokenizerConfig:
-    english: bool = True
-    dutch: bool = True
-    sentencizer: bool = True
-    keep_hyphens: bool = True
+class SpellingConfig:
+    pyspellchecker: bool = True
+
+    levenshtein_distance: bool = True
+    dam_levenshtein_distance: bool = True
+    jaro_winkler_similarity: bool = True
+    phonetic_soundex: bool = True
+    phonetic_metaphone: bool = True
+    phonetic_nysiis: bool = True
 
 
-class Tokenizer:
-    """Two-stage tokenizer with optional English and Dutch spaCy enrichment."""
+class Spelling:
+    """Extract Dutch/English spelling features from tokenized text."""
 
-    def __init__(self, config: TokenizerConfig | None = None) -> None:
-        self.config = config or TokenizerConfig()
-        self.nlp = spacy.blank("xx")
+    def __init__(self, config: SpellingConfig | None = None) -> None:
+        """Initialize the Spelling extractor with optional configuration."""
+        self.config = config or SpellingConfig()
+        self.spellchecker: dict[str, SpellChecker] = {}
 
-        self.nlp_en = spacy.load(str(SPACY_EN)) if self.config.english else None
-        self.nlp_nl = spacy.load(str(SPACY_NL)) if self.config.dutch else None
+    def extract_word(self, word: str, language: str) -> SpellingFeatures:
+        """Extract spelling features for a single word."""
+        if self.spellchecker.get(language) is None:
+            self.spellchecker[language] = SpellChecker(language=language)
 
-        if self.config.sentencizer:
-            self.nlp.add_pipe("sentencizer")
+        is_misspelled = bool(word in self.spellchecker[language])
+        word_corrected = self.spellchecker[language].correction(word)
 
-        if self.config.keep_hyphens:
-            infixes = [x for x in self.nlp.Defaults.infixes if x != "-"]
-            self.nlp.tokenizer.infix_finditer = compile_infix_regex(infixes).finditer
+        lev_distance = self._levenshtein_distance(word, word_corrected) if self.config.levenshtein_distance else None
+        dam_lev_distance = self._dam_levenshtein_distance(word, word_corrected) if self.config.dam_levenshtein_distance else None
+        jaro_winkler_sim = self._jaro_winkler_similarity(word, word_corrected) if self.config.jaro_winkler_similarity else None
+        phonetic_soundex = self._phonetic_soundex(word, word_corrected) if self.config.phonetic_soundex else None
+        phonetic_metaphone = self._phonetic_metaphone(word, word_corrected) if self.config.phonetic_metaphone else None
+        phonetic_nysiis = self._phonetic_nysiis(word, word_corrected) if self.config.phonetic_nysiis else None
 
-    def simple_tokenize(self, text: str) -> tuple[list[str], list[WordToken]]:
-        doc = self.nlp(text)
+        grammar = False  # Replace with actual grammar check
+        typo = False  # Replace with actual typo check
 
-        sentences = [sent.text.strip() for sent in doc.sents]
-        tokens = [
-            WordToken(
-                word=token.text,
-                is_alpha=token.is_alpha,
-                is_stop=token.is_stop,
-            )
-            for token in doc
-            if not token.is_space
-        ]
-
-        return sentences, tokens
-
-    def linguistic_tokenize(self, text: str, language: str) -> SentenceToken:
-        if language == "en" and self.nlp_en is not None:
-            doc = self.nlp_en(text)
-        elif language == "nl" and self.nlp_nl is not None:
-            doc = self.nlp_nl(text)
-        else:
-            _, fallback_tokens = self.simple_tokenize(text)
-            return SentenceToken(sentence=text, language=language, tokens=fallback_tokens)
-
-        tokens = [
-            WordToken(
-                word=token.text,
-                is_alpha=token.is_alpha,
-                is_stop=token.is_stop,
-                lemma=token.lemma_,
-                pos=token.pos_,
-                tag=token.tag_,
-                dep=token.dep_,
-                shape=token.shape_,
-            )
-            for token in doc
-            if not token.is_space
-        ]
-
-        return SentenceToken(sentence=text, language=language, tokens=tokens)
-
-    def tokenize(self, text: str) -> TokenizedText:
-        sentences, _ = self.simple_tokenize(text)
-        doc_language = self._detect_language(text)
-
-        sent_tokens: list[SentenceToken] = []
-        for sent in sentences:
-            language = self._detect_language(sent)
-            sent_tokens.append(self.linguistic_tokenize(sent, language))
-
-        word_tokens = [token for sent in sent_tokens for token in sent.tokens]
-
-        return TokenizedText(
-            text=text,
-            language=doc_language,
-            word_tokens=word_tokens,
-            sent_tokens=sent_tokens,
+        return SpellingFeatures(
+            word=word,
+            is_misspelled=is_misspelled,
+            grammar=grammar,
+            typo=typo,
+            word_corrected=word_corrected,
+            levenshtein_distance=lev_distance,
+            dam_levenshtein_distance=dam_lev_distance,
+            jaro_winkler_similarity=jaro_winkler_sim,
+            phonetic_soundex=phonetic_soundex,
+            phonetic_metaphone=phonetic_metaphone,
+            phonetic_nysiis=phonetic_nysiis,
         )
+    
+    def extract(self, tokenized: Any) -> SpellingText:
+        """Extract spelling features from tokenized text."""
+        list_words, list_language = tokenized.get_words, tokenized.get_languages
+        spelling_features = [self.extract_word(word, language) for word, language in zip(list_words, list_language)]
+        return SpellingText(
+            text=tokenized.text,
+            features=spelling_features
+        )
+    
+    def _levenshtein_distance(self, word1: str, word2: str) -> int:
+        """Calculate Levenshtein distance between two words."""
 
-    def _detect_language(self, text: str) -> str:
-        try:
-            language = detect(text).split("-")[0]
-        except LangDetectException:
-            return "nl"
+        return
+    
+    def _dam_levenshtein_distance(self, word1: str, word2: str) -> int:
+        """Calculate Damerau-Levenshtein distance between two words."""
+        return
+    
+    def _jaro_winkler_similarity(self, word1: str, word2: str) -> float:
+        """Calculate Jaro-Winkler similarity between two words."""
+        return
+    
+    def _phonetic_soundex(self, word: str) -> str:
+        """Calculate Soundex phonetic encoding for a word."""
+        return
 
-        if language not in ["en", "nl"]:
-            raise ValueError(f"Unsupported language detected: {language}")
+    def _phonetic_metaphone(self, word: str) -> str:
+        """Calculate Metaphone phonetic encoding for a word."""
+        return
+    
+    def _phonetic_nysiis(self, word: str) -> str:
+        """Calculate NYSIIS phonetic encoding for a word."""
+        return
 
-        return language
-
-    def __call__(self, text: str) -> TokenizedText:
-        return self.tokenize(text)
+    def __call__(self, tokenized: Any) -> SpellingText:
+        """Allow the Spelling extractor to be called directly on tokenized text."""
+        return self.extract(tokenized)
+    
