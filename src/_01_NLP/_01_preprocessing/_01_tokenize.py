@@ -36,9 +36,9 @@ class SentenceToken:
     tokens: list[WordToken]
 
     @property 
-    def get_words(self) -> list[str]:
-        return [token.word for token in self.tokens if token.is_alpha]
-    
+    def get_words(self, stop_words: bool = False) -> list[str]:
+        return [token.word for token in self.tokens if token.is_alpha and (stop_words or not token.is_stop)]
+
 
 
 @dataclass(frozen=True)
@@ -49,8 +49,8 @@ class TokenizedText:
     sent_tokens: list[SentenceToken]
 
     @property
-    def get_words(self) -> list[str]:
-        return [token.word for token in self.word_tokens if token.is_alpha]
+    def get_words(self, stop_words: bool=False) -> list[str]:
+        return [token.word for token in self.word_tokens if token.is_alpha and (stop_words or not token.is_stop)]
     
     @property
     def get_sentences(self) -> list[str]:
