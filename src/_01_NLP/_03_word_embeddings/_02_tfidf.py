@@ -33,7 +33,7 @@ class Tfidf:
         tokens = [token for tokenized_text in corpus for token in tokenized_text.get_words(self.config.stop_words)]
         token_counts = Counter(tokens)
 
-        max_df_threshold = int(self.config.max_df * len(corpus)) if isinstance(self.config.max_df, float) else self.config.max_df
+        max_df_threshold = int(self.config.max_df * len(corpus))
         self.vocabulary = [word for word, count in sorted(token_counts.items()) if count >= self.config.min_df and count <= max_df_threshold][:self.config.max_features]
 
         # INVERSE DOCUMENT FREQUENCY
